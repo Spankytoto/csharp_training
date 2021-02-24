@@ -15,8 +15,7 @@ namespace addressbook_web_tests
         {
         }
 
-
-            public void FillGroupForm(GroupData group)
+        public void FillGroupForm(GroupData group)
             {
                 driver.FindElement(By.Name("group_name")).Click();
                 driver.FindElement(By.Name("group_name")).Clear();
@@ -51,6 +50,11 @@ namespace addressbook_web_tests
                 driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             }
 
+            public void InitNewGroupCreation()
+            {
+            driver.FindElement(By.Name("new")).Click();
+            }
 
-        }
+
+    }
     }

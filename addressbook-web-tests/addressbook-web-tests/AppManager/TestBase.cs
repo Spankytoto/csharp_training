@@ -12,28 +12,30 @@ namespace addressbook_web_tests
 {
     public class TestBase
     {
-        protected ApplicationManager app;
+        public ApplicationManager app;
 
-        protected LoginHelper loginHelper;
-        protected NavigationHelper navigator;
-        protected GroupHelper groupHelper;
-        protected ContactHelper contactHelper;
+      //  protected NavigationHelper navigator;
+      //  protected LoginHelper loginHelper;
+      //  protected GroupHelper groupHelper;
+       // protected ContactHelper contactHelper;
 
-        protected IWebDriver driver;
-        protected string baseURL;
+       // public IWebDriver driver;
+       // public string baseURL;
 
 
         [SetUp]
         public void SetupTest()
         {
-        driver = new FirefoxDriver();
+     //   navigator = new NavigationHelper(driver, baseURL);
+    //    loginHelper = new LoginHelper(driver);
+    //    groupHelper = new GroupHelper(driver);
+     //   contactHelper = new ContactHelper(driver);
+
+      //  driver = new FirefoxDriver();
         app = new ApplicationManager();
-        baseURL = "http://localhost/addressbook/";
+       // baseURL = "http://localhost/addressbook/";
         
-        loginHelper = new LoginHelper(driver);
-        navigator = new NavigationHelper(driver, baseURL);
-        groupHelper = new GroupHelper(driver);
-        contactHelper = new ContactHelper(driver);
+
 
     }
 

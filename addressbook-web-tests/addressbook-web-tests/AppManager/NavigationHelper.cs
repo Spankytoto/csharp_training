@@ -12,8 +12,7 @@ namespace addressbook_web_tests
     public class NavigationHelper : HelperBase
     {
 
-        private string baseURL;
-
+        public string baseURL;
 
         public NavigationHelper(IWebDriver driver, string baseURL) : base(driver)
         {
@@ -33,6 +32,7 @@ namespace addressbook_web_tests
         {
             driver.FindElement(By.LinkText("home page")).Click();
         }
+
     }
 
 }

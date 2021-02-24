@@ -10,23 +10,28 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_tests
 {
-    public class ApplicationManager
+    public class ApplicationManager 
     {
-        protected IWebDriver driver;
-        protected string baseURL;
+        public IWebDriver driver;
+        public string baseURL;
 
-        protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
+        protected LoginHelper loginHelper;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
-
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
+            
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost/addressbook";
             navigator = new NavigationHelper(driver, baseURL);
+            loginHelper = new LoginHelper(driver);
             groupHelper = new GroupHelper(driver);
             contactHelper = new ContactHelper(driver);
+
+            
+            
         }
 
         public LoginHelper Auth
@@ -58,7 +63,6 @@ namespace addressbook_web_tests
                 return contactHelper;
             }
         }
-
 
         public void Stop() 
         {
