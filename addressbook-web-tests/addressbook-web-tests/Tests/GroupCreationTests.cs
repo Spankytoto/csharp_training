@@ -15,19 +15,27 @@ namespace addressbook_web_tests
         [Test]
         public void GroupCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GoToGroupsPage();
-            app.Groups.InitNewGroupCreation();
-            GroupData group = new GroupData("aaa");
+            //app.Navigator.GoToGroupsPage();
+            GroupData group = new GroupData("CCC");
             group.Header = "ddd";
             group.Footer = "bbb";
-            app.Groups.FillGroupForm(group);
-            app.Groups.SubmitGroupCreation();
-            app.Groups.ReturnToGroupsPage();
+            app.Groups.Create(group);
         }
 
-     }
+
+        [Test]
+        public void EpmtyGroupCreationTest()
+        {
+            //app.Navigator.GoToGroupsPage();
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+            app.Groups.Create(group);
+
+        }
+
+
+    }
       
  }
   

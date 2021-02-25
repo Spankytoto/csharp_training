@@ -26,14 +26,18 @@ namespace addressbook_web_tests
         [SetUp]
         public void SetupTest()
         {
-     //   navigator = new NavigationHelper(driver, baseURL);
-    //    loginHelper = new LoginHelper(driver);
-    //    groupHelper = new GroupHelper(driver);
-     //   contactHelper = new ContactHelper(driver);
 
-      //  driver = new FirefoxDriver();
-        app = new ApplicationManager();
-       // baseURL = "http://localhost/addressbook/";
+            app = new ApplicationManager();
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            //   navigator = new NavigationHelper(driver, baseURL);
+            //    loginHelper = new LoginHelper(driver);
+            //    groupHelper = new GroupHelper(driver);
+            //   contactHelper = new ContactHelper(driver);
+
+            //  driver = new FirefoxDriver();
+           
+            // baseURL = "http://localhost/addressbook/";
         
 
 

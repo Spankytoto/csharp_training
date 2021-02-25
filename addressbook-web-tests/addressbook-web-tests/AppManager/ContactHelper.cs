@@ -11,15 +11,16 @@ namespace addressbook_web_tests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(IWebDriver driver) : base(driver)
+        public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
-        public void SubmitContactCreation()
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
 
-        public void FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -27,11 +28,52 @@ namespace addressbook_web_tests
             driver.FindElement(By.Name("lastname")).Click();
             driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
+            return this;
         }
 
-        public void GoToNewContactPage()
+        public ContactHelper GoToNewContactPage()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
+
+
+        public ContactHelper Modify(int p, ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(1);
+            InitContactModification();
+            FillContactForm(contact);
+            SubmitContactModification();
+            ReturnToContactsPage();
+            return this;
+        }
+
+        public ContactHelper ReturnToContactsPage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+            driver.FindElement(By.LinkText("Logout")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+        public ContactHelper InitContactModification()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            return this;
+        }
+
+
+
     }
 }
