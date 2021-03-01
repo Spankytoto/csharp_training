@@ -9,15 +9,15 @@ namespace addressbook_web_tests
 {
 
     [TestFixture]
-    public class ContactModificationTests : TestBase
+    public class ContactModificationTests : AuthTestBase
     {
         [Test]
         public void ContactModificationTest()
         {
             
             ContactData contact = new ContactData();
-            contact.Firstname = "Anton";
-            contact.Lastname = "Antonov";
+            contact.Firstname = "MEGA";
+            contact.Lastname = "LOL";
             app.Contacts.Modify(1, contact);
         }
     }

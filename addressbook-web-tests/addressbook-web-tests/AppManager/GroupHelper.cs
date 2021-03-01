@@ -19,6 +19,7 @@ namespace addressbook_web_tests
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
+            GroupCount();
             SelectGroup(1);
             InitGroupModification();
             FillGroupForm(newData);
@@ -51,20 +52,18 @@ namespace addressbook_web_tests
 
 
         public GroupHelper FillGroupForm(GroupData group)
-            {
-                driver.FindElement(By.Name("group_name")).Click();
-                driver.FindElement(By.Name("group_name")).Clear();
-                driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-                driver.FindElement(By.Name("group_header")).Click();
-                driver.FindElement(By.Name("group_header")).Clear();
-                driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-                driver.FindElement(By.Name("group_footer")).Click();
-                driver.FindElement(By.Name("group_footer")).Clear();
-                driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+        {
+            Type(By.Name("group_name"), group.Name);
+            Type(By.Name("group_header"), group.Header);
+            Type(By.Name("group_footer"), group.Footer);
             return this;
-            }
+        }
 
-            public GroupHelper ReturnToGroupsPage()
+
+
+
+
+        public GroupHelper ReturnToGroupsPage()
             {
                 driver.FindElement(By.LinkText("group page")).Click();
                 driver.FindElement(By.LinkText("Logout")).Click();
@@ -85,10 +84,26 @@ namespace addressbook_web_tests
             return this;
             }
 
+            public GroupHelper GroupCount()
+            {
+            if (IsElementPresent(By.Name("selected[]")))
+            {
+            }
+            else
+            {
+                GroupData group = new GroupData("321");
+                group.Header = "111";
+                group.Footer = "";
+                manager.Groups.Create(group);
+            }
+            return this;
+            }
+
+
 
             public GroupHelper SelectGroup(int index)
             {
-                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
             }
 

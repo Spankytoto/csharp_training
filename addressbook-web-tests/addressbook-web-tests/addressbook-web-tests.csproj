@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactModificationTests.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="AppManager\ApplicationManager.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Tests\GroupCreationTests.cs" />
     <Compile Include="Tests\ContactCreationTests.cs" />
     <Compile Include="AppManager\TestBase.cs" />
+    <Compile Include="Tests\LoginTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

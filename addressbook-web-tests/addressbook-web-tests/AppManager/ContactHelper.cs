@@ -22,14 +22,13 @@ namespace addressbook_web_tests
 
         public ContactHelper FillContactForm(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
+            Type(By.Name("firstname"), contact.Firstname);
+            Type(By.Name("lastname"), contact.Lastname);
             return this;
+
         }
+
+
 
         public ContactHelper GoToNewContactPage()
         {
@@ -41,11 +40,31 @@ namespace addressbook_web_tests
         public ContactHelper Modify(int p, ContactData contact)
         {
             manager.Navigator.GoToHomePage();
+            ContactCount();
             SelectContact(1);
             InitContactModification();
             FillContactForm(contact);
             SubmitContactModification();
             ReturnToContactsPage();
+            return this;
+        }
+
+
+        public ContactHelper ContactCount()
+        {
+            if (IsElementPresent(By.XPath("//img[@alt='Edit']")))
+            {
+
+            }
+            else { 
+            ContactData contact = new ContactData();
+            contact.Firstname = "123";
+            contact.Lastname = "321";
+            manager.Contacts.GoToNewContactPage()
+            .FillContactForm(contact)
+            .SubmitContactCreation();
+            manager.Navigator.BackToHomePage();
+        }
             return this;
         }
 

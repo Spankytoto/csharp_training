@@ -11,14 +11,14 @@ using OpenQA.Selenium.Support.UI;
 namespace addressbook_web_tests
 {
     [TestFixture]
-    public class ContactCreationTests : TestBase
+    public class ContactCreationTests : AuthTestBase
     {
         [Test]
         public void ContactCreationTest()
         {
             ContactData contact = new ContactData();
-            contact.Firstname = "Super";
-            contact.Lastname = "Puper";
+            contact.Firstname = "123";
+            contact.Lastname = "321";
             app.Contacts.GoToNewContactPage()
                         .FillContactForm(contact)
                         .SubmitContactCreation();
