@@ -33,6 +33,7 @@ namespace addressbook_web_tests
         public GroupHelper Remove()
         {
             manager.Navigator.GoToGroupsPage();
+            GroupCount();
             SelectGroup(1);
             RemoveGroup();
             ReturnToGroupsPage();
