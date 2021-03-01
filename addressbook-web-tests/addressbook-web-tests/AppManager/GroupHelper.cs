@@ -30,11 +30,12 @@ namespace addressbook_web_tests
 
 
 
-        public GroupHelper Remove()
+        public GroupHelper Remove(int p)
         {
             manager.Navigator.GoToGroupsPage();
             GroupCount();
-            SelectGroup(1);
+          //manager.Navigator.GoToGroupsPage();
+            SelectGroup(p);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
@@ -67,7 +68,7 @@ namespace addressbook_web_tests
         public GroupHelper ReturnToGroupsPage()
             {
                 driver.FindElement(By.LinkText("group page")).Click();
-                driver.FindElement(By.LinkText("Logout")).Click();
+        //driver.FindElement(By.LinkText("Logout")).Click();
             return this;
             }
 
@@ -78,12 +79,6 @@ namespace addressbook_web_tests
             }
 
 
-
-            public GroupHelper RemoveGroup()
-            {
-                driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
-            return this;
-            }
 
             public GroupHelper GroupCount()
             {
@@ -100,9 +95,13 @@ namespace addressbook_web_tests
             return this;
             }
 
+             public GroupHelper RemoveGroup()
+             {
+             driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
+             return this;
+             }
 
-
-            public GroupHelper SelectGroup(int index)
+        public GroupHelper SelectGroup(int index)
             {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
@@ -14,6 +16,9 @@ namespace addressbook_web_tests
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
+
+
+
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
@@ -49,6 +54,17 @@ namespace addressbook_web_tests
             return this;
         }
 
+        public ContactHelper ContactRemove(int f)
+        {
+            manager.Navigator.GoToHomePage();
+            ContactCount();
+            SelectContact(f);
+            ContactRemove();
+            ReturnToContactsPage();
+            return this;
+        }
+
+
 
         public ContactHelper ContactCount()
         {
@@ -74,6 +90,17 @@ namespace addressbook_web_tests
             driver.FindElement(By.LinkText("Logout")).Click();
             return this;
         }
+
+
+        public ContactHelper ContactRemove()
+        {
+            {
+                driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+                driver.SwitchTo().Alert().Accept();
+                return this;
+            }
+        }
+
 
         public ContactHelper SelectContact(int index)
         {
