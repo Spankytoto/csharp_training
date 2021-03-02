@@ -13,12 +13,21 @@ namespace addressbook_web_tests
     [TestFixture]
     public class ContactRemovalTests : AuthTestBase
     {
+
+        public void PrepareContact(AccountData account)
+        {
+            app.Contacts.ContactCount(account);
+        }
+
+
         [Test]
-        public void ContactRemovalTest () 
+        public void ContactRemovalTest()
         {
             app.Contacts.ContactRemove(1);
         }
-
     }
-
 }
+
+
+
+

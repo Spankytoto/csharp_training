@@ -19,7 +19,7 @@ namespace addressbook_web_tests
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            GroupCount();
+            //GroupCount();
             SelectGroup(1);
             InitGroupModification();
             FillGroupForm(newData);
@@ -33,8 +33,8 @@ namespace addressbook_web_tests
         public GroupHelper Remove(int p)
         {
             manager.Navigator.GoToGroupsPage();
-            GroupCount();
-          //manager.Navigator.GoToGroupsPage();
+            //GroupCount();
+            //manager.Navigator.GoToGroupsPage();
             SelectGroup(p);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -48,6 +48,7 @@ namespace addressbook_web_tests
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnToGroupsPage();
+            manager.Auth.Logout();
             return this;
         }
 
@@ -80,8 +81,10 @@ namespace addressbook_web_tests
 
 
 
-            public GroupHelper GroupCount()
+            public GroupHelper GroupCount(AccountData account)
             {
+            manager.Navigator.GoToGroupsPage();
+
             if (IsElementPresent(By.Name("selected[]")))
             {
             }

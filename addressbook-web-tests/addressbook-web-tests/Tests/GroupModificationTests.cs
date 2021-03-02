@@ -11,6 +11,11 @@ namespace addressbook_web_tests
     [TestFixture]
     public class GroupModificationTests : AuthTestBase
     {
+        public void PrepareGroup(AccountData account)
+        {
+            app.Groups.GroupCount(account);
+        }
+
         [Test]
         public void GroupModificationTest()
         {
