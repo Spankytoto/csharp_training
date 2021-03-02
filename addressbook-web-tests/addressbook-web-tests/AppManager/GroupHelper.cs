@@ -19,7 +19,6 @@ namespace addressbook_web_tests
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            //GroupCount();
             SelectGroup(1);
             InitGroupModification();
             FillGroupForm(newData);
@@ -33,8 +32,6 @@ namespace addressbook_web_tests
         public GroupHelper Remove(int p)
         {
             manager.Navigator.GoToGroupsPage();
-            //GroupCount();
-            //manager.Navigator.GoToGroupsPage();
             SelectGroup(p);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -43,12 +40,12 @@ namespace addressbook_web_tests
 
         public GroupHelper Create (GroupData group)
         {
+
             manager.Navigator.GoToGroupsPage();
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnToGroupsPage();
-            manager.Auth.Logout();
             return this;
         }
 
@@ -69,7 +66,7 @@ namespace addressbook_web_tests
         public GroupHelper ReturnToGroupsPage()
             {
                 driver.FindElement(By.LinkText("group page")).Click();
-        //driver.FindElement(By.LinkText("Logout")).Click();
+                //driver.FindElement(By.LinkText("Logout")).Click();
             return this;
             }
 
@@ -81,7 +78,7 @@ namespace addressbook_web_tests
 
 
 
-            public GroupHelper GroupCount(AccountData account)
+            public GroupHelper GroupCount()
             {
             manager.Navigator.GoToGroupsPage();
 
@@ -94,6 +91,7 @@ namespace addressbook_web_tests
                 group.Header = "111";
                 group.Footer = "";
                 manager.Groups.Create(group);
+                //manager.Navigator.GoToHomePage();
             }
             return this;
             }

@@ -14,14 +14,14 @@ namespace addressbook_web_tests
     [TestFixture]
     public class ContactModificationTests : AuthTestBase
     {
-
-        public void PrepareContact(AccountData account)
+        
+        [SetUp]
+        public void PrepareContact()
         {
-            app.Contacts.ContactCount(account);
+            app.Contacts.ContactCount();
         }
 
         [Test]
-
 
         public void ContactModificationTest()
         {

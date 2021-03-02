@@ -11,19 +11,23 @@ namespace addressbook_web_tests
     [TestFixture]
     public class GroupModificationTests : AuthTestBase
     {
-        public void PrepareGroup(AccountData account)
+
+        [SetUp]
+        public void PrepareGroup()
         {
-            app.Groups.GroupCount(account);
+            app.Groups.GroupCount();
+
         }
 
         [Test]
-        public void GroupModificationTest()
-        {
-            GroupData newData = new GroupData("zzz");
-            newData.Header = "123";
-            newData.Footer = "321";
-            app.Groups.Modify(1, newData);
-
+        public void GroupModificationTest() { 
+            
+                GroupData newData = new GroupData("zzz");
+                newData.Header = "123";
+                newData.Footer = "321";
+                app.Groups.Modify(1, newData);
+            }
         }
     }
-}
+
+

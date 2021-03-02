@@ -45,7 +45,6 @@ namespace addressbook_web_tests
         public ContactHelper Modify(int p, ContactData contact)
         {
             manager.Navigator.GoToHomePage();
-            //ContactCount();
             SelectContact(1);
             InitContactModification();
             FillContactForm(contact);
@@ -57,7 +56,6 @@ namespace addressbook_web_tests
         public ContactHelper ContactRemove(int f)
         {
             manager.Navigator.GoToHomePage();
-            //ContactCount();
             SelectContact(f);
             ContactRemove();
             ReturnToContactsPage();
@@ -66,10 +64,9 @@ namespace addressbook_web_tests
 
 
 
-        public ContactHelper ContactCount(AccountData account)
+        public ContactHelper ContactCount()
         {
             manager.Navigator.GoToHomePage();
-            manager.Auth.Login(account);
             if (IsElementPresent(By.XPath("//img[@alt='Edit']")))
             {
             }
@@ -82,7 +79,6 @@ namespace addressbook_web_tests
             .FillContactForm(contact)
             .SubmitContactCreation();
             manager.Navigator.BackToHomePage();
-            manager.Auth.Logout();
              }
             return this;
              }
