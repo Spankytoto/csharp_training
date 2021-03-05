@@ -17,14 +17,28 @@ namespace addressbook_web_tests
         [SetUp]
         public void PrepareContact()
         {
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.ContactCount();
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts, newContacts);
         }
 
 
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contacts.ContactRemove(1);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            app.Contacts.ContactRemove(0);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+
+            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

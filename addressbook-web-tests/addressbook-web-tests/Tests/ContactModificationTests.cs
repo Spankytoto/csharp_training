@@ -25,11 +25,19 @@ namespace addressbook_web_tests
 
         public void ContactModificationTest()
         {
-            
-            ContactData contact = new ContactData();
-            contact.Firstname = "MEGA";
-            contact.Lastname = "LOL";
-            app.Contacts.Modify(1, contact);
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            ContactData contact = new ContactData("MEGA", "LOL");
+            //contact.Firstname = "MEGA";
+            //contact.Lastname = "LOL";
+            app.Contacts.Modify(0, contact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].Firstname = contact.Firstname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 
