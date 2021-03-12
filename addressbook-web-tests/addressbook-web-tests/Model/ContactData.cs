@@ -31,42 +31,29 @@ namespace addressbook_web_tests
             return Firstname == other.Firstname && Lastname == other.Lastname;
         }
 
-        public int GetHashCode()
+        public override int GetHashCode()
         {
             return firstname.GetHashCode();
         }
 
-        public int GetHashCode1()
-        {
-            return lastname.GetHashCode();
-        }
 
-        public string ToString()
+        public override string ToString()
         {
             return firstname;
-        }
-
-        public string ToString1()
-        {
-            return lastname;
         }
 
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
-                return 1;
+                return lastname.CompareTo(other.Lastname);
             }
-            return firstname.CompareTo(other.Firstname);
-        }
 
-        public int CompareTo1(ContactData other)
-        {
             if (Object.ReferenceEquals(other, null))
             {
                 return 1;
             }
-            return lastname.CompareTo(other.Lastname);
+            return firstname.CompareTo(other.Firstname);
         }
 
         public string Firstname
