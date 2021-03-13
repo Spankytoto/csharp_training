@@ -38,17 +38,25 @@ namespace addressbook_web_tests
             return this;
         }
 
+
+        private List<GroupData> groupCashe = null;
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.GoToGroupsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
+            if (groupCashe == null)
             {
-                groups.Add(new GroupData(element.Text));
+                groupCashe = new List<GroupData>();
+                List<GroupData> groups = new List<GroupData>();
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    groupCashe.Add(new GroupData(element.Text));
+                }
+
             }
 
-            return groups;
+            return new List<GroupData>(groupCashe);
         }
 
         public GroupHelper Create (GroupData group)
@@ -62,7 +70,10 @@ namespace addressbook_web_tests
             return this;
         }
 
-
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
 
         public GroupHelper FillGroupForm(GroupData group)
         {
@@ -86,6 +97,7 @@ namespace addressbook_web_tests
             public GroupHelper SubmitGroupCreation()
             {
                 driver.FindElement(By.Name("submit")).Click();
+            groupCashe = null;
             return this;
             }
 
@@ -112,6 +124,7 @@ namespace addressbook_web_tests
              public GroupHelper RemoveGroup()
              {
              driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
+             groupCashe = null;
              return this;
              }
 
@@ -137,6 +150,7 @@ namespace addressbook_web_tests
              public GroupHelper SubmitGroupModification()
              {
              driver.FindElement(By.Name("update")).Click();
+             groupCashe = null;
              return this;
              }
 

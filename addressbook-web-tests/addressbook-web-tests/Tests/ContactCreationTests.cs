@@ -30,6 +30,8 @@ namespace addressbook_web_tests
             app.Navigator.BackToHomePage();
             app.Auth.Logout();
 
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+
             List <ContactData> newContacts = app.Contacts.GetContactList();
 
             oldContacts.Add(contact);

@@ -22,6 +22,7 @@ namespace addressbook_web_tests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            contactCashe = null;
             return this;
         }
 
@@ -54,32 +55,35 @@ namespace addressbook_web_tests
             return contacts;
         } */
 
+
+        private List<ContactData> contactCashe = null;
+
+
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name=\"entry\"]"));
-            foreach (IWebElement element in elements)
+            if (contactCashe == null)
             {
-                ICollection<IWebElement> cells = element.FindElements(By.TagName("td"));
-                int i = 0;
-                string firstname = "";
-                string lastname = "";
-                foreach (IWebElement cell in cells)
+                contactCashe = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name=\"entry\"]"));
+                foreach (IWebElement element in elements)
                 {
-                    i++;
-                    if (i == 3)
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    int i = 0;
+                    string firstname = "";
+                    string lastname = "";
+                    foreach (IWebElement cell in cells)
                     {
-                        lastname = cell.Text;
-                    }
-                    else if (i == 2)
-                    {
-                        firstname = cell.Text;
+                        i++;
+                            lastname = cells[2].Text;
+                            firstname = cells[1].Text;
+                        contactCashe.Add(new ContactData(lastname, firstname));
                     }
                 }
-                contacts.Add(new ContactData(lastname, firstname));
+            
             }
-            return contacts;
+            return new List<ContactData>(contactCashe);
         }
 
         public ContactHelper Modify(int p, ContactData contact)
@@ -113,8 +117,6 @@ namespace addressbook_web_tests
             else
             { 
             ContactData contact = new ContactData("123", "321");
-            //contact.Firstname = "123";
-            //contact.Lastname = "321";
             manager.Contacts.GoToNewContactPage()
             .FillContactForm(contact)
             .SubmitContactCreation();
@@ -136,6 +138,7 @@ namespace addressbook_web_tests
             {
                 driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
                 driver.SwitchTo().Alert().Accept();
+                contactCashe = null;
                 return this;
             }
         }
@@ -155,7 +158,13 @@ namespace addressbook_web_tests
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            contactCashe = null;
             return this;
+        }
+
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.CssSelector("tr[name=\"entry\"]")).Count;
         }
 
 

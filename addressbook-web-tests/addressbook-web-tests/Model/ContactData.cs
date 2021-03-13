@@ -44,16 +44,19 @@ namespace addressbook_web_tests
 
         public int CompareTo(ContactData other)
         {
-            if (Object.ReferenceEquals(other, null))
-            {
-                return lastname.CompareTo(other.Lastname);
-            }
 
             if (Object.ReferenceEquals(other, null))
             {
                 return 1;
             }
-            return firstname.CompareTo(other.Firstname);
+            lastname.CompareTo(other.Lastname);
+
+            if (other.Lastname == lastname)
+            {
+            firstname.CompareTo(other.Firstname);
+            }
+            return lastname.CompareTo(other.Lastname) + firstname.CompareTo(other.Firstname);
+
         }
 
         public string Firstname
