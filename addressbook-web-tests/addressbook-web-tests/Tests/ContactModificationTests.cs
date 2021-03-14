@@ -33,7 +33,7 @@ namespace addressbook_web_tests
             //contact.Lastname = "LOL";
             app.Contacts.Modify(0, contact);
 
-//            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
+            //Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
 
             List<ContactData> newContacts = app.Contacts.GetContactList();

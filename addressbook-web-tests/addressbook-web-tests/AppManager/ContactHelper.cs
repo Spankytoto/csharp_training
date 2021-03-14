@@ -70,16 +70,12 @@ namespace addressbook_web_tests
                 foreach (IWebElement element in elements)
                 {
                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                    int i = 0;
                     string firstname = "";
                     string lastname = "";
-                    foreach (IWebElement cell in cells)
-                    {
-                        i++;
-                            lastname = cells[2].Text;
-                            firstname = cells[1].Text;
-                        contactCashe.Add(new ContactData(lastname, firstname));
-                    }
+                    lastname = cells[2].Text;
+                    firstname = cells[4].Text;
+                    contactCashe.Add(new ContactData(lastname, firstname));
+                    
                 }
             
             }
