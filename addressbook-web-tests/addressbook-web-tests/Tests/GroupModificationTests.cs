@@ -27,6 +27,7 @@ namespace addressbook_web_tests
                 newData.Footer = "321";
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData oldData = oldGroups[0];
 
             app.Groups.Modify(0, newData);
 
@@ -37,6 +38,14 @@ namespace addressbook_web_tests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                if (group.id == oldData.id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+            }
         }
         }
     }

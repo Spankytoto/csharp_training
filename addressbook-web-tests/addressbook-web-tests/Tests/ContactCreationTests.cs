@@ -24,10 +24,7 @@ namespace addressbook_web_tests
             //contact.Lastname = "321";
 
 
-            app.Contacts.GoToNewContactPage()
-                        .FillContactForm(contact)
-                        .SubmitContactCreation();
-            app.Navigator.BackToHomePage();
+            app.Contacts.CreateContact(0, contact);
             app.Auth.Logout();
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());

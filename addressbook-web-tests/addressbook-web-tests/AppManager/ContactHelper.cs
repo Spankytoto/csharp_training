@@ -93,6 +93,15 @@ namespace addressbook_web_tests
             return this;
         }
 
+        public ContactHelper CreateContact(int p, ContactData contact)
+        {
+            GoToNewContactPage();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReturnToContactsPage();
+            return this;
+        }
+
         public ContactHelper ContactRemove(int f)
         {
             manager.Navigator.GoToHomePage();

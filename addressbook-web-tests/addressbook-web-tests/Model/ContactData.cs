@@ -13,8 +13,8 @@ namespace addressbook_web_tests
 
     public ContactData (string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+           Firstname = firstname;
+           Lastname = lastname;
         }
 
 
@@ -63,28 +63,12 @@ namespace addressbook_web_tests
 
 
 
-        public string Firstname
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
+        public string Firstname { get; set; }
 
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
+
+        public string Lastname { get; set; }
+
+        public string id { get; set; }
+
     }
 }
