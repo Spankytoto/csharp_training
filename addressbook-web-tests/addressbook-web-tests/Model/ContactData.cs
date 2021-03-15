@@ -8,6 +8,7 @@ namespace addressbook_web_tests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        private string allPhones;
         //protected string firstname = "";
         //protected string lastname = "";
 
@@ -67,10 +68,46 @@ namespace addressbook_web_tests
 
         public string Firstname { get; set; }
 
-
         public string Lastname { get; set; }
 
         public string id { get; set; }
+
+        public string Address { get; set; }
+
+        public string HomePhone { get; set; }
+
+        public string MobilePhone { get; set; }
+
+        public string WorkPhone
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (Cleanup(HomePhone) + Cleanup(MobilePhone) + Cleanup(WorkPhone)).Trim();
+                }
+            }
+
+            set
+            {
+                AllPhones = value;
+            }
+        }
+
+        private string Cleanup(string phone)
+        {
+          if (phone == null)
+            {
+                return "";
+            }
+            return phone.Replace("", "").Replace("", "").Replace("", "").Replace(")", "");
+        }
+
+        public string AllPhones { get; set; }
 
     }
 }

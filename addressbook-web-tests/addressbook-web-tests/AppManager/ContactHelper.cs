@@ -28,7 +28,19 @@ namespace addressbook_web_tests
 
         public ContactData GetContactInformationFromTable(int index)
         {
-            throw new NotImplementedException();
+            manager.Navigator.GoToHomePage();
+            IList<IWebElement> newCells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
+            string lastname = newCells[1].Text;
+            string firstname = newCells[2].Text;
+            string address = newCells[3].Text;
+            string allPhones = newCells[5].Text;
+
+            return new ContactData(firstname, lastname)
+            {
+                Address = address,
+                AllPhones = allPhones,
+            };
+
         }
 
         public ContactData GetContactInformationFromEditForm(int index)
@@ -36,14 +48,21 @@ namespace addressbook_web_tests
             manager.Navigator.GoToHomePage();
             SelectContact(0);
             InitContactModification();
-            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
-            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            throw new NotImplementedException();
+            return new ContactData(firstname, lastname)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone
+
+            };
         }
 
 
