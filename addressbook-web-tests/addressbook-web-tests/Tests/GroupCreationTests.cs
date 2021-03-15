@@ -18,7 +18,7 @@ namespace addressbook_web_tests
         {
             //app.Navigator.GoToGroupsPage();
             GroupData group = new GroupData("CCC");
-            group.Header = "ddd";
+            group.Header = @"d\d\d";
             group.Footer = "bbb";
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();

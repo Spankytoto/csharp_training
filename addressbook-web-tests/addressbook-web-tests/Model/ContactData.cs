@@ -8,8 +8,8 @@ namespace addressbook_web_tests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        protected string firstname = "";
-        protected string lastname = "";
+        //protected string firstname = "";
+        //protected string lastname = "";
 
     public ContactData (string firstname, string lastname)
         {
@@ -33,31 +33,33 @@ namespace addressbook_web_tests
 
         public override int GetHashCode()
         {
-            return firstname.GetHashCode();
+            return (Firstname + " " + Lastname).GetHashCode();
         }
 
 
         public override string ToString()
         {
-            return firstname;
+            return Firstname + " " + Lastname;
         }
+
 
         public int CompareTo(ContactData other)
         {
-
-            lastname.CompareTo(other.Lastname);
-
             if (Object.ReferenceEquals(other, null))
-
             {
                 return 1;
             }
-            
-            else 
-            {
-                firstname.CompareTo(other.Firstname);
+            int result = Lastname.CompareTo(other.Lastname);
+                {
+                if (result != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    return Firstname.CompareTo(other.Firstname);
+                }
             }
-            return 0;
 
         }
 
