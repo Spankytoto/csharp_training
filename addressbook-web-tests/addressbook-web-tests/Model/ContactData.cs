@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace addressbook_web_tests
 {
@@ -40,7 +41,8 @@ namespace addressbook_web_tests
 
         public override string ToString()
         {
-            return Firstname + " " + Lastname;
+            return "firstname = " + Firstname + "/nlastname = " + Lastname;
+
         }
 
 
@@ -100,11 +102,11 @@ namespace addressbook_web_tests
 
         private string Cleanup(string phone)
         {
-          if (phone == null)
+          if (phone == null || phone == "")
             {
                 return "";
             }
-            return phone.Replace("", "").Replace("", "").Replace("", "").Replace(")", "");
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
         }
 
         public string AllPhones { get; set; }

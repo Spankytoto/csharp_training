@@ -74,7 +74,13 @@ namespace addressbook_web_tests
 
         }
 
-
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.GoToHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
+        }
 
         public ContactHelper GoToNewContactPage()
         {

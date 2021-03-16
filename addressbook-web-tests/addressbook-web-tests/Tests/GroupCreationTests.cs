@@ -13,13 +13,29 @@ namespace addressbook_web_tests
     [TestFixture]
     public class GroupCreationTests : AuthTestBase
     {
-        [Test]
-        public void GroupCreationTest()
+
+        public static IEnumerable<GroupData> RandomGroupDateProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i <5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(100),
+                });
+            }
+            return groups;
+        }
+
+
+        [Test, TestCaseSource ("RandomGroupDateProvider")]
+        public void GroupCreationTest(GroupData group)
         {
             //app.Navigator.GoToGroupsPage();
-            GroupData group = new GroupData("CCC");
-            group.Header = @"d\d\d";
-            group.Footer = "bbb";
+            //GroupData group = new GroupData("CCC");
+            //group.Header = @"d\d\d";
+            //group.Footer = "bbb";
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
@@ -35,27 +51,6 @@ namespace addressbook_web_tests
             Assert.AreEqual(oldGroups, newGroups);
         }
 
-
-        [Test]
-        public void EpmtyGroupCreationTest()
-        {
-            //app.Navigator.GoToGroupsPage();
-            GroupData group = new GroupData("123");
-            group.Header = "123";
-            group.Footer = "123";
-
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-
-            app.Groups.Create(group);
-
-            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
-
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-        }
 
         [Test]
         public void BadNameGroupCreationTest()
