@@ -34,11 +34,13 @@ namespace addressbook_web_tests
             string firstname = newCells[2].Text;
             string address = newCells[3].Text;
             string allPhones = newCells[5].Text;
+            string allEmails = newCells[4].Text;
 
             return new ContactData(firstname, lastname)
             {
                 Address = address,
                 AllPhones = allPhones,
+                AllEmails = allEmails
             };
 
         }
@@ -48,7 +50,7 @@ namespace addressbook_web_tests
             manager.Navigator.GoToHomePage();
             SelectContact(0);
             ContactInternalsView();
-            string firstname = driver.FindElement(By.XPath("//div[@id='content']/b").GetAttribute("value");
+            string firstname = driver.FindElement(By.XPath("firstname")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
 
             return new ContactData(firstname, lastname);
@@ -72,13 +74,20 @@ namespace addressbook_web_tests
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
 
             return new ContactData(firstname, lastname)
             {
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
-                WorkPhone = workPhone
+                WorkPhone = workPhone,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3,
+
 
             };
         }
@@ -106,22 +115,8 @@ namespace addressbook_web_tests
             return this;
         }
 
-        /*public List<ContactData> GetContactList()
-        {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in elements)
-            {
-                contacts.Add(new ContactData(element.Text, element.Text));
-            }
-
-            return contacts;
-        } */
-
 
         private List<ContactData> contactCashe = null;
-
 
 
         public List<ContactData> GetContactList()

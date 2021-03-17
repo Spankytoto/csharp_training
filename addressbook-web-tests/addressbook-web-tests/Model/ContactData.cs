@@ -111,5 +111,42 @@ namespace addressbook_web_tests
 
         public string AllPhones { get; set; }
 
+
+        public string Email { get; set; }
+
+        public string Email2 { get; set; }
+
+        public string Email3
+        {
+            get
+            {
+                if (AllEmails != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUP(Email) + CleanUP(Email2) + CleanUP(Email3)).Trim();
+                }
+            }
+
+            set
+            {
+                AllPhones = value;
+            }
+        }
+
+
+        private string CleanUP(string allEmails)
+        {
+            if (allEmails == null || allEmails == "")
+            {
+                return "";
+            }
+            return Regex.Replace(allEmails, "[ -()]", "") + "\r\n";
+        }
+
+        public string AllEmails { get; set; }
+
     }
 }
