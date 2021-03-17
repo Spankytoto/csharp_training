@@ -10,6 +10,7 @@ namespace addressbook_web_tests
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
+        private string allEmails;
         //protected string firstname = "";
         //protected string lastname = "";
 
@@ -112,31 +113,6 @@ namespace addressbook_web_tests
         public string AllPhones { get; set; }
 
 
-        public string Email { get; set; }
-
-        public string Email2 { get; set; }
-
-        public string Email3
-        {
-            get
-            {
-                if (AllEmails != null)
-                {
-                    return allPhones;
-                }
-                else
-                {
-                    return (CleanUP(Email) + CleanUP(Email2) + CleanUP(Email3)).Trim();
-                }
-            }
-
-            set
-            {
-                AllPhones = value;
-            }
-        }
-
-
         private string CleanUP(string allEmails)
         {
             if (allEmails == null || allEmails == "")
@@ -147,6 +123,35 @@ namespace addressbook_web_tests
         }
 
         public string AllEmails { get; set; }
+
+        public string Email { get; set; }
+
+        public string Email2 { get; set; }
+
+        public string Email3
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanUP(Email) + CleanUP(Email2) + CleanUP(Email3)).Trim();
+                }
+            }
+
+            set
+            {
+                AllEmails = value;
+            }
+        }
+
+
+
+
+
 
     }
 }
