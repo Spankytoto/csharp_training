@@ -43,6 +43,24 @@ namespace addressbook_web_tests
 
         }
 
+        public ContactData GetContactInformationFromInternals(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(0);
+            ContactInternalsView();
+            string firstname = driver.FindElement(By.XPath("//div[@id='content']/b").GetAttribute("value");
+            string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+
+            return new ContactData(firstname, lastname);
+
+        }
+
+        public ContactHelper ContactInternalsView ()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Details']")).Click();
+            return this;
+        }
+
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
@@ -119,7 +137,7 @@ namespace addressbook_web_tests
                     string firstname = "";
                     string lastname = "";
                     lastname = cells[2].Text;
-                    firstname = cells[4].Text;
+                    firstname = cells[1].Text;
                     contactCashe.Add(new ContactData(lastname, firstname));
                     
                 }
@@ -215,7 +233,7 @@ namespace addressbook_web_tests
 
         public int GetContactCount()
         {
-            return driver.FindElements(By.CssSelector("tr[name=\"entry\"]")).Count;
+            return driver.FindElements(By.CssSelector("tr[name=\"entry\"]")).Count();
         }
 
 

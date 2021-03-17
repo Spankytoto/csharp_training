@@ -30,6 +30,21 @@ namespace addressbook_web_tests
         }
 
 
+        [Test]
+        public void TestContactInformationForHomework()
+        {
+            ContactData fromInternal = app.Contacts.GetContactInformationFromInternals(0);
+            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+
+
+            //verification
+
+            Assert.AreEqual(fromInternal, fromForm);
+            Assert.AreEqual(fromInternal.Address, fromForm.Address);
+            Assert.AreEqual(fromInternal.AllPhones, fromForm.AllPhones);
+
+        }
+
 
     }
 }
