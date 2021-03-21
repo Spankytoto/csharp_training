@@ -50,11 +50,22 @@ namespace addressbook_web_tests
             manager.Navigator.GoToHomePage();
             SelectContact(0);
             ContactInternalsView();
-            string firstname = driver.FindElement(By.XPath("firstname")).GetAttribute("value");
+            string firstName = driver.FindElement(By.Name("container")).FindElement(By.TagName("b"));
+            string lastName = driver.FindElement(By.Name("container")).FindElement(By.TagName("b"));
+
+            return new ContactData(firstName, lastName);
+
+        }
+
+        public ContactData GetContactInformationFromEditFormHomeWork(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(0);
+            InitContactModification();
+            string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
 
             return new ContactData(firstname, lastname);
-
         }
 
         public ContactHelper ContactInternalsView ()

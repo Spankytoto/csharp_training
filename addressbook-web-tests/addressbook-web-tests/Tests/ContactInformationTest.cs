@@ -35,14 +35,13 @@ namespace addressbook_web_tests
         public void TestContactInformationForHomework()
         {
             ContactData fromInternal = app.Contacts.GetContactInformationFromInternals(0);
-            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+            ContactData fromForm = app.Contacts.GetContactInformationFromEditFormHomeWork(0);
 
-
-            //verification
 
             Assert.AreEqual(fromInternal, fromForm);
-            Assert.AreEqual(fromInternal.Address, fromForm.Address);
-            Assert.AreEqual(fromInternal.AllPhones, fromForm.AllPhones);
+            Assert.AreEqual(fromInternal.firstName, fromForm.firstName);
+            Assert.AreEqual(fromInternal.lastName, fromForm.lastName);
+            
 
         }
 

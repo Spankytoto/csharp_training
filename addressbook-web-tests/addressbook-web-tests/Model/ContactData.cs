@@ -67,7 +67,9 @@ namespace addressbook_web_tests
 
         }
 
+        public string firstName { get; set; }
 
+        public string lastName { get; set; }
 
         public string Firstname { get; set; }
 
