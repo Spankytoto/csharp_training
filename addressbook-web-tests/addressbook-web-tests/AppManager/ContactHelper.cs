@@ -45,17 +45,17 @@ namespace addressbook_web_tests
 
         }
 
-        public ContactData GetContactInformationFromInternals(int index)
-        {
-            manager.Navigator.GoToHomePage();
-            SelectContact(0);
-            ContactInternalsView();
-            string firstName = driver.FindElement(By.Name("container")).FindElement(By.TagName("b"));
-            string lastName = driver.FindElement(By.Name("container")).FindElement(By.TagName("b"));
+        //public ContactData GetContactInformationFromInternals(int index)
+        //{
+            //manager.Navigator.GoToHomePage();
+            //SelectContact(0);
+            //ContactInternalsView();
+            //string firstName = driver.FindElement(By.Name("container")).FindElement(By.TagName("b"));
+            //string lastName = driver.FindElement(By.Name("container")).FindElement(By.TagName("b"));
 
-            return new ContactData(firstName, lastName);
+            //return new ContactData(firstName, lastName);
 
-        }
+        //
 
         public ContactData GetContactInformationFromEditFormHomeWork(int index)
         {

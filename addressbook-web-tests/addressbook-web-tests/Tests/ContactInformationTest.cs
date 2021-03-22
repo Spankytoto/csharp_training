@@ -31,7 +31,7 @@ namespace addressbook_web_tests
         }
 
 
-        [Test]
+       /* [Test]
         public void TestContactInformationForHomework()
         {
             ContactData fromInternal = app.Contacts.GetContactInformationFromInternals(0);
@@ -43,7 +43,7 @@ namespace addressbook_web_tests
             Assert.AreEqual(fromInternal.lastName, fromForm.lastName);
             
 
-        }
+        } */
 
 
     }

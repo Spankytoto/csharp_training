@@ -5,8 +5,11 @@ using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
 using OpenQA.Selenium;
+using System.IO;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace addressbook_web_tests
 {
@@ -28,9 +31,38 @@ namespace addressbook_web_tests
             return groups;
         }
 
+        public static IEnumerable<GroupData> GroupDataFromCsvFile()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            string[] lines = File.ReadAllLines(@"groups.csv");
+            foreach (string l in lines)
+            {
+               string [] parts = l.Split(',');
+                groups.Add(new GroupData(parts[0])
+                {
+                    Header = parts[1],
+                    Footer = parts[2]
+                });
+            }
+            return groups;
+        }
 
-        [Test, TestCaseSource ("RandomGroupDateProvider")]
-        public void GroupCreationTest(GroupData group)
+
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            
+            return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize
+                (new StreamReader(@"groups.xml"));
+        }
+
+
+
+
+
+
+
+        [Test, TestCaseSource ("GroupDataFromXmlFile")]
+        public void GroupCreationTest(GroupData groups)
         {
             //app.Navigator.GoToGroupsPage();
             //GroupData group = new GroupData("CCC");
@@ -39,13 +71,13 @@ namespace addressbook_web_tests
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            app.Groups.Create(group);
+            app.Groups.Create(groups);
 
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
 
             List <GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.Add(group);
+            oldGroups.Add(groups);
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);

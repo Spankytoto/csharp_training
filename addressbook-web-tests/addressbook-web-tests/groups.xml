@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGroupData xmlns:xsi="http://www.w3.org/2001/XMLShema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLShema">
+	<GroupData>
+		<Name>Rick</Name>
+<Header>LOL</Header>
+<Footer>Lolski</Footer>
+	</GroupData>
+</ArrayOfGroupData>

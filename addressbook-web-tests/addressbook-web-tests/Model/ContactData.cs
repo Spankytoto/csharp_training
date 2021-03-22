@@ -20,6 +20,11 @@ namespace addressbook_web_tests
            Lastname = lastname;
         }
 
+    public ContactData ()
+        {
+
+        }
+
 
         public bool Equals(ContactData other)
         {
