@@ -31,19 +31,18 @@ namespace addressbook_web_tests
         }
 
 
-       /* [Test]
+       [Test]
         public void TestContactInformationForHomework()
         {
-            ContactData fromInternal = app.Contacts.GetContactInformationFromInternals(0);
-            ContactData fromForm = app.Contacts.GetContactInformationFromEditFormHomeWork(0);
+            string fromDetailForm = app.Contacts.GetContactInformationFromInternals(0);
+            var fromEditForm = app.Contacts.GetContactInformationFromEditFormHomeWork(0);
+
+            Assert.IsTrue(fromDetailForm.Contains(fromEditForm.Lastname) && fromDetailForm.Contains(fromEditForm.Firstname));
 
 
-            Assert.AreEqual(fromInternal, fromForm);
-            Assert.AreEqual(fromInternal.firstName, fromForm.firstName);
-            Assert.AreEqual(fromInternal.lastName, fromForm.lastName);
             
 
-        } */
+        } 
 
 
     }

@@ -11,8 +11,10 @@ namespace addressbook_web_tests
     {
         private string allPhones;
         private string allEmails;
+        public string FIO;
         //protected string firstname = "";
         //protected string lastname = "";
+        
 
     public ContactData (string firstname, string lastname)
         {
@@ -72,9 +74,6 @@ namespace addressbook_web_tests
 
         }
 
-        public string firstName { get; set; }
-
-        public string lastName { get; set; }
 
         public string Firstname { get; set; }
 
