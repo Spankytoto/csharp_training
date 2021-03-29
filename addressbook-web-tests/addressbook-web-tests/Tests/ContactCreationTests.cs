@@ -79,6 +79,22 @@ namespace addressbook_web_tests
             Assert.AreEqual(oldContacts, newContacts);
         }
 
+        [Test]
+
+        public void TestDBconnectivityForContacts()
+        {
+            DateTime start = DateTime.Now;
+            List<ContactData> fromUI = app.Contacts.GetContactList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
+
+
+            start = DateTime.Now;
+            List<ContactData> fromDb = ContactData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
+        }
+
     }
 
  }

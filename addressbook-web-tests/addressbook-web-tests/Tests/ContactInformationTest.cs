@@ -37,10 +37,12 @@ namespace addressbook_web_tests
             string fromDetailForm = app.Contacts.GetContactInformationFromInternals(0);
             var fromEditForm = app.Contacts.GetContactInformationFromEditFormHomeWork(0);
 
-            Assert.IsTrue(fromDetailForm.Contains(fromEditForm.Lastname) && fromDetailForm.Contains(fromEditForm.Firstname));
+            //Assert.IsTrue(fromDetailForm.Contains(fromEditForm.Lastname) && fromDetailForm.Contains(fromEditForm.Firstname));
+
+            Assert.AreEqual(fromDetailForm, fromEditForm);
 
 
-            
+
 
         } 
 

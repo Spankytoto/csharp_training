@@ -57,7 +57,7 @@ namespace addressbook_web_tests
         }
  
 
-        public ContactData GetContactInformationFromEditFormHomeWork(int index)
+        public string GetContactInformationFromEditFormHomeWork(int index)
         {
             ContactData contactFromEditForm = new ContactData();
             manager.Navigator.GoToHomePage();
@@ -66,7 +66,9 @@ namespace addressbook_web_tests
             contactFromEditForm.Firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             contactFromEditForm.Lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
 
-            return contactFromEditForm;
+            string FIO = contactFromEditForm.Firstname + " " + contactFromEditForm.Lastname;
+
+            return FIO;
         }
 
         public ContactHelper ContactInternalsView ()

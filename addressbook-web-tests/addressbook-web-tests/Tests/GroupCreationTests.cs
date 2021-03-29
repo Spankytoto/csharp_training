@@ -10,6 +10,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace addressbook_web_tests
 {
@@ -103,9 +104,27 @@ namespace addressbook_web_tests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
+
+        [Test]
+
+        public void TestDBconnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUI = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
+
+
+            start = DateTime.Now;
+            List<GroupData> fromDb = GroupData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
+        }
+
+
     }
-      
- }
+
+}
   
  
 
