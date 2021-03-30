@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
-
+using NUnit.Framework;
+using System.Threading;
 
 namespace addressbook_web_tests
 {
@@ -30,6 +31,7 @@ namespace addressbook_web_tests
             Type(By.Name("user"),account.Username);
             Type(By.Name("pass"),account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            Thread.Sleep(2000);
         }
 
         public bool IsLoggedIn()

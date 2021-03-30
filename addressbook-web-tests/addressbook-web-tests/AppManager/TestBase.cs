@@ -14,6 +14,8 @@ namespace addressbook_web_tests
     {
         public ApplicationManager app;
 
+        public static Boolean PERFORM_LONG_UI_CHECKS = true;
+
 
         [SetUp]
         public void SetupApplicationManager()

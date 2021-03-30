@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using LinqToDB.Mapping;
+using System.Threading;
 
 namespace addressbook_web_tests
 {
@@ -161,9 +162,11 @@ namespace addressbook_web_tests
 
             public static List<ContactData> GetAll()
         {
+            Thread.Sleep(2000);
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from g in db.Contacts select g).ToList();
+
+                return (from s in db.Contacts select s).ToList();
             }
         }
     }

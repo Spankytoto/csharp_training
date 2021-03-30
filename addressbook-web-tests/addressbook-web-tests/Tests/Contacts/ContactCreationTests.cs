@@ -63,7 +63,9 @@ namespace addressbook_web_tests
         [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreationTest(ContactData contact)
         {
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            
+            List<ContactData> oldContacts = ContactData.GetAll();
+            app.Auth.Login(new AccountData("admin", "secret"));
 
 
             app.Contacts.CreateContact(0, contact);
@@ -71,12 +73,12 @@ namespace addressbook_web_tests
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
-            List <ContactData> newContacts = app.Contacts.GetContactList();
+            List <ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
-            Assert.AreEqual(oldContacts, newContacts);
+            Assert.AreEqual(oldContacts, newContacts); 
         }
 
         [Test]

@@ -30,8 +30,9 @@ namespace addressbook_web_tests
         public void ContactRemovalTest()
         {
             List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[0];
 
-            app.Contacts.ContactRemove(0);
+            app.Contacts.ContactRemove(toBeRemoved);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
@@ -41,6 +42,11 @@ namespace addressbook_web_tests
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.id, toBeRemoved.id);
+            }
         }
     }
 }

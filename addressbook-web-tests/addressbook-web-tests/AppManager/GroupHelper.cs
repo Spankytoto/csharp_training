@@ -19,7 +19,7 @@ namespace addressbook_web_tests
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(1);
+            SelectGroup(p);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -27,7 +27,16 @@ namespace addressbook_web_tests
             return this;
         }
 
-
+        public GroupHelper Modify(GroupData newData, GroupData toBeModification)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(toBeModification.id);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+            return this;
+        }
 
         public GroupHelper Remove(int p)
         {
@@ -37,6 +46,16 @@ namespace addressbook_web_tests
             ReturnToGroupsPage();
             return this;
         }
+
+        public GroupHelper Remove(GroupData group)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(group.id);
+            RemoveGroup();
+            ReturnToGroupsPage();
+            return this;
+        }
+
 
 
         private List<GroupData> groupCashe = null;
@@ -139,7 +158,16 @@ namespace addressbook_web_tests
             return this;
             }
 
-            public GroupHelper InitGroupModification()
+
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
+
+            return this;
+        }
+
+
+        public GroupHelper InitGroupModification()
             {
             driver.FindElement(By.Name("edit")).Click();
             return this;
