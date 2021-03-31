@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -24,6 +25,50 @@ namespace addressbook_web_tests
             driver.FindElement(By.Name("submit")).Click();
             contactCashe = null;
             return this;
+        }
+
+        public void DeleteContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilterForDelete();
+            SelectContactForAdd(contact.id);
+            CommitDeleteFromGroup();
+            //new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void CommitDeleteFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            SelectContactForAdd(contact.id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            //new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
+        public void ClearGroupFilterForDelete()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("Rick");
         }
 
         public ContactData GetContactInformationFromTable(int index)
@@ -256,6 +301,11 @@ namespace addressbook_web_tests
             return this;
         }
 
+        public ContactHelper SelectContactForAdd(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
+            return this;
+        }
 
         public ContactHelper InitContactModification()
         {

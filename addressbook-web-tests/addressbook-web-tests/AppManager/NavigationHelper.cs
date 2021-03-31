@@ -20,10 +20,6 @@ namespace addressbook_web_tests
         }
         public void GoToHomePage()
         {
-            if (driver.Url == baseURL + "/group.php")
-            {
-                return;
-            }
             driver.Navigate().GoToUrl(baseURL);
         }
 

@@ -106,6 +106,19 @@ namespace addressbook_web_tests
 
         public void TestDBconnectivity()
         {
+            Thread.Sleep(2000);
+            app.Auth.Login(new AccountData("admin", "secret"));
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                
+                System.Console.Out.WriteLine(contact);
+            }
+        }
+
+        /*[Test]
+
+        public void TestDBconnectivity()
+        {
             DateTime start = DateTime.Now;
             List<GroupData> fromUI = app.Groups.GetGroupList();
             DateTime end = DateTime.Now;
@@ -116,7 +129,7 @@ namespace addressbook_web_tests
             List<GroupData> fromDb = GroupData.GetAll();
             end = DateTime.Now;
             System.Console.Out.Write(end.Subtract(start));
-        }
+        } */
 
 
     }

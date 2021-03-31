@@ -30,7 +30,7 @@ namespace addressbook_web_tests
             List<ContactData> oldContacts = ContactData.GetAll();
 
 
-             ContactData contact = new ContactData("Maga", "Lezgin");
+             ContactData contact = new ContactData("MMMMMMMMM", "NNNNNNNNNN");
 
              ContactData toBeModified = oldContacts[0];
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -16,10 +17,9 @@ namespace addressbook_web_tests
         [SetUp]
         public void SetupLogin()
         {
-
             app = ApplicationManager.GetInstance();
             app.Auth.Login(new AccountData("admin", "secret"));
-            app.Auth.Logout();
+            //app.Auth.Logout();
 
         }
     }
