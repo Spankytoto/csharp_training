@@ -31,7 +31,7 @@ namespace addressbook_web_tests
         {
             manager.Navigator.GoToHomePage();
             ClearGroupFilterForDelete();
-            SelectContactForAdd(contact.id);
+            //SelectContactForAdd(contact.id);
             CommitDeleteFromGroup();
             //new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
         }
